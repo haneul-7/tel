@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- 사용자 정의 CSS -->
+  <link href="main.css" rel="stylesheet">
+  <!-- Bootstrap JS (Bundle: Popper 포함) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Axios (HTTP 통신 라이브러리) -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- 사용자 정의 JS -->
+  <script src="read.js"></script>
+  <title>연락처 목록</title>
+</head>
+<body>
+  <div id="app"> <!-- 전체 앱을 감싸는 컨테이너 -->
+    <header>연락처 관리</header> <!-- 상단 헤더 -->
+    <!-- 내비게이션 메뉴 -->
+    <nav>
+      <ul>
+        <li><a href="list.html">HOME</a></li>
+        <li><a href="list.html">연락처</a></li>
+      </ul>
+    </nav>
+
+    <!-- 메인 영역 -->
+    <main>
+      <aside></aside> <!-- 왼쪽 사이드바 (현재 비어 있음) -->
+
+      <!-- 중앙 메인 콘텐츠 -->
+      <section>
+        <table>
+          <tr>
+            <td colspan="5">    <!-- 사진을 표시할 영역, JS에서 src 속성을 채워 넣음 -->
+              <img id="photo">
+            </td>
+          </tr>
+          <tr>
+            <td>이름</td><td id="name"></td>    <!-- 이름 데이터를 출력할 자리 -->
+          </tr>
+          <tr>
+            <td>주소</td><td id="address"></td>   <!-- 주소 데이터를 출력할 자리 -->
+          </tr>
+          <tr>
+            <td>연락처</td><td id="tel"></td>   <!-- 전화번호 데이터를 출력할 자리 -->
+          </tr>
+        </table>
+      </section>
+
+      <aside></aside> <!-- 오른쪽 사이드바 (현재 비어 있음) -->
+    </main>
+    <footer></footer> <!-- 하단 푸터 -->
+  </div>
+  <script>
+    const no = getNo(); 
+    // URL 쿼리스트링에서 연락처 번호(no)를 가져옴
+    // 예: read.html?no=3 → no = 3
+    // 값이 없으면(null) → 잘못된 접근
+
+    if (no === null) {
+      // no가 없으면 목록 페이지로 강제 이동
+      location.href = "list.html";
+    }
+
+    fetchContact(no);
+    // no 값이 유효하다면, 서버에서 해당 번호의 연락처 상세 정보를 불러옴
+    // 그리고 불러온 데이터로 화면의 테이블(name, address, tel, photo 등)을 채움
+  </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- 사용자 정의 CSS -->
+  <link href="main.css" rel="stylesheet">
+  <!-- Bootstrap JS (Bundle: Popper 포함) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Axios (HTTP 통신 라이브러리) -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- 사용자 정의 JS -->
+  <script src="list.js"></script>
+  <script>
+    const pageno = getPageno();
+    // 현재 페이지 번호(pageno)를 URL 쿼리스트링에서 가져와서 변수에 저장
+    // 예: URL이 list.html?pageno=3 → pageno = 3
+    //     URL에 pageno가 없으면 → pageno = 1 (기본값)
+
+    const contacts = fetchContacts(pageno);
+    // pageno 값을 fetchContacts 함수에 전달해서 서버에서 연락처 목록을 가져옴
+    // 하지만 fetchContacts는 axios로 비동기 통신을 하기 때문에
+    // 실제 연락처 배열을 즉시 반환하지 않고
+    // contacts 변수에는 undefined 또는 Promise 같은 값이 들어감
+
+    console.log(contacts);
+  </script>
+  <title>연락처 목록</title>
+</head>
+<body>
+  <div id="app"> <!-- 전체 앱을 감싸는 컨테이너 -->
+    <header>연락처 관리</header> <!-- 상단 헤더 -->
+    <!-- 내비게이션 메뉴 -->
+    <nav>
+      <ul>
+        <li><a href="list.html">HOME</a></li>
+        <li><a href="list.html">연락처</a></li>
+      </ul>
+    </nav>
+
+    <!-- 메인 영역 -->
+    <main>
+      <aside></aside> <!-- 왼쪽 사이드바 (현재 비어 있음) -->
+
+      <!-- 중앙 메인 콘텐츠 -->
+      <section>
+        <!-- 연락처 테이블 -->
+        <table class="table table-hover"> <!-- Bootstrap table 클래스 적용 -->
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>이름</th>
+              <th>전화</th>
+              <th>주소</th>
+            </tr>
+          </thead>
+          <tbody id="contacts"> <!-- 자바스크립트로 연락처 목록을 동적으로 추가할 예정 -->
+          </tbody>
+        </table>
+        <ul class="pagination" id="pagination"></ul> <!-- 페이지네이션 (목록 넘기기 버튼 영역) -->
+      </section>
+      <aside></aside> <!-- 오른쪽 사이드바 (현재 비어 있음) -->
+    </main>
+    <footer></footer> <!-- 하단 푸터 -->
+  </div>
+</body>
+</html>
